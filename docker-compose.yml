@@ -1,0 +1,18 @@
+version: "3"
+services:
+  apache-php7.1-test:
+    image: registry.cn-guangzhou.aliyuncs.com/softstao/apache:php7.1
+    container_name: apache-php7.1-test
+    restart: always
+    ports:
+      - "8080:80"
+    # Ensure the read and write access
+    privileged: true
+    volumes:
+      - ./php-product/:/data/workspace/  # 可根据自己项目文件夹修改
+      - ./sites-enabled/:/etc/apache2/sites-enabled
+    environment:
+      TZ: Asia/Shanghai
+networks:
+  frontend:
+    driver: bridge
